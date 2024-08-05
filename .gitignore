@@ -1,0 +1,6 @@
+experiments/*
+!experiments/.gitignore
+notebooks/*
+!notebooks/.gitignore
+.idea/*
+.ipynb_checkpoints/*
