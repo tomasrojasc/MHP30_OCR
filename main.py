@@ -57,6 +57,31 @@ with open(filename, 'w') as f:
 
 t0 = time.time()
 
+
+while True:
+    ret, frame = vid.read()
+
+    if not ret:
+        break
+
+    text_ = reader.readtext(frame)
+    try:
+        current_temp = find_temp_meas(text_)
+        # if the current temp is greater than 360 we skip the current iteration
+        if current_temp > 360:
+            continue
+    except:
+        current_temp = None
+
+    if current_temp is not None:
+        line = f"{time.time() - t0},{current_temp},{args.setpoint}"
+        print("current line: ", line)
+
+    input_ = input("Do you want to start the program? (y/n): ")
+    if input_ == 'y':
+        break
+
+
 previous_temp = -100
 
 while True:
