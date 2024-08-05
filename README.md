@@ -22,7 +22,7 @@ Where:
 - `D`: Derivative gain of the PID controller.
 - `setpoint`: The desired temperature of the heat plate.
 
-The program will record data to the `experiments` folder with the name `temperature_data_<P>_<I>_<D>_<setpoint>.csv` as
+The program will record data to the `experiments` folder with the name `<P>_<I>_<D>/<setpoint>.csv` as
 long as the program is running.
 
 The structure of the data is as follows:
