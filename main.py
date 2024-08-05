@@ -81,7 +81,7 @@ while True:
     if input_ == 'y':
         break
 
-
+t0 = time.time()
 previous_temp = -100
 
 while True:
