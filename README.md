@@ -34,3 +34,14 @@ Timestamp,Temperature,Setpoint
 ...
 ```
 where the `...` imply rows of data.
+
+## Notes
+
+Make sure that the only text in the image is from the heat plate (this might include the text "MHP30" printed on the
+heat plate). The program uses the `easyocr` to read the text from the image, and it might read other text if
+it is present in the image. In that case the program might not work as intended.
+
+It has been noted that a good focus will improve the performance of the program. The program will work with a blurry
+image, but it will not be as accurate as with a focused image. The problem with the blurry image is that it might give 
+numbers that the program will consider garbage data, and will discard, which will have the consequence of a drop in the 
+sampling time of it.
