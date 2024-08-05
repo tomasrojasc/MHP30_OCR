@@ -41,8 +41,13 @@ def find_temp_meas(text_):
 
 
 # the filename will be temperature_data_<P>_<I>_<D>_<setpoint>.csv
-filename = f'temperature_data_{args.P}_{args.I}_{args.D}_{args.setpoint}.csv'
-filename = os.path.join('experiments', filename)
+folder = os.path.join('experiments', f"{args.P}_{args.I}_{args.D}".replace('.', 'DOT'))
+
+if not os.path.exists(folder):
+    os.makedirs(folder)
+
+filename = f'{int(args.setpoint)}.csv'
+filename = os.path.join(folder, filename)
 
 # we first start the csv file with the header (we will write line by line)
 # the first line has the PID parameters, then the header of the csv file
