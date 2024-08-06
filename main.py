@@ -4,7 +4,7 @@ import time
 import argparse
 import os
 
-
+threshold = 251
 parser = argparse.ArgumentParser(description='PID tunning IronOS')
 
 # Use positional arguments for the PID constants
@@ -17,7 +17,7 @@ args = parser.parse_args()
 
 reader = easyocr.Reader(["en"], gpu=False)
 # Initialize video capture
-vid = cv2.VideoCapture(0)
+vid = cv2.VideoCapture(1)
 
 # Initialize lists to store temperature and timestamps
 temperatures = []
@@ -60,6 +60,13 @@ t0 = time.time()
 
 while True:
     ret, frame = vid.read()
+    # turn the frame to grayscale if the frame is not None
+    if frame is not None:
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        frame = (frame > threshold) * 251
+        frame = frame.astype('uint8')
+        # we need a depth of 1 channel for the OCR to work
+        frame = cv2.merge((frame, frame, frame))
 
     if not ret:
         break
@@ -86,6 +93,13 @@ previous_temp = -100
 
 while True:
     ret, frame = vid.read()
+    # turn the frame to grayscale
+    if frame is not None:
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        frame = (frame > threshold) * 251
+        frame = frame.astype('uint8')
+        # we need a depth of 1 channel for the OCR to work
+        frame = cv2.merge((frame, frame, frame))
 
     if not ret:
         break
